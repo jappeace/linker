@@ -1,4 +1,8 @@
-# Change log for template project
+# Change log for linker project
+
+## Version 0.0.1 
+
++ parse elf
 
 ## Version 0.0.0 
 

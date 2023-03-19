@@ -1,7 +1,5 @@
-# I used chatgpt to generate this template and then just
-# modified to how I normally use these things.
 {
-  description = "My Haskell project";
+  description = "A haskell based linker";
 
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixpkgs-unstable";
@@ -16,15 +14,15 @@
       pkgs = nixpkgs.legacyPackages.x86_64-linux;
       hpkgs = pkgs.haskell.packages.ghc944.override {
         overrides = hnew: hold: {
-          template-project = hnew.callCabal2nix "template-project" ./. { };
+          linker = hnew.callCabal2nix "linker" ./. { };
         };
       };
     in
     {
-      defaultPackage.x86_64-linux =  hpkgs.template-project;
+      defaultPackage.x86_64-linux =  hpkgs.linker-project;
       inherit pkgs;
       devShell.x86_64-linux = hpkgs.shellFor {
-        packages = ps : [ ps."template-project" ];
+        packages = ps : [ ps."linker" ];
         withHoogle = true;
 
         buildInputs = [
